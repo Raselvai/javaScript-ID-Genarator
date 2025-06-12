@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="app, landing, corporate, Creative, Html Template, Template">
+    <meta name="author" content="web-themes">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- title -->
+    <title>JavaScript ID Generator</title>
+
+    <!-- favicon -->
+    <!-- <link href="img/favicon.png" type="image/png" rel="icon"> -->
+
+    <!-- all css here -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  
+
+    <div class="wrapper">
+        <div>
+            <button id="generate">Generate ID Number</button>
+            <p id="output"></p>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        
+        (function() {
+            function IDGenerator() {
+                this.length = 8;
+                this.timestamp = +new Date;
+
+                var _getRandomInt = function( min, max) {
+                    return Math.floor( Math.random() * ( max - min + 1)) + min;
+                }
+
+                this.generate = function() {
+                    var ts = this.timestamp.toString();
+                    var parts = ts.split( "" ).reverse();
+                    var id = "";
+
+                    for ( var i = 0; i < this.length; ++i ) {
+                        var index = _getRandomInt( 0, parts.length - 1);
+                        id += parts[index];
+                    }
+                    return id;
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                var btn = document.querySelector("#generate"),
+                output = document.querySelector("#output");
+
+                btn.addEventListener("click", function(){
+                    var generator = new IDGenerator();
+                    output.innerHTML = generator.generate();
+                }, false);
+            });
+
+        })();
+
+
+
+    </script>
+</body>
+</html>
